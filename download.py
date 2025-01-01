@@ -5,6 +5,7 @@ import subprocess
 import argparse
 from yt_dlp import YoutubeDL
 import time
+import threading
 
 # Function to print a highly prominent warning message
 def print_critical_warning(message):
@@ -64,8 +65,72 @@ def print_critical_warning(message):
     # Critical prompt with flashing effect
     prompt = "\nTo prevent this catastrophe, please type 'I UNDERSTAND AND ACCEPT THE RISK':"
     print(flashing_red + prompt + reset)
-    # Get user input
-    response = input("> ")
+
+    # Event to signal if user input is received
+    user_input_received = threading.Event()
+    stop_event = threading.Event()
+    response_holder = {'response': None}
+
+    def countdown_timer(duration, user_input_received, stop_event):
+        seconds_remaining = duration
+        while seconds_remaining >= 0 and not user_input_received.is_set() and not stop_event.is_set():
+            mins, secs = divmod(seconds_remaining, 60)
+            timer_display = f"{mins:02d}:{secs:02d}"
+            # Build the countdown box
+            countdown_box = [
+                bold_red + "+" + "-" * 10 + "+" + reset,
+                bold_red + "|" + f"  {timer_display}   |" + reset,
+                bold_red + "+" + "-" * 10 + "+" + reset
+            ]
+            # Move cursor up 4 lines (3 for box, 1 for prompt/input)
+            print("\033[s\033[4A", end='')  # Save cursor position and move up
+            # Clear the three lines
+            for _ in range(3):
+                print("\r\033[K", end='')  # Move to start of line and clear line
+                print("\033[1B", end='')  # Move down to next line
+            print("\033[3A", end='')  # Move back up to start of box
+            # Print the countdown box
+            for line in countdown_box:
+                print("\r" + line)
+            # Restore cursor position
+            print("\033[u", end='', flush=True)
+            time.sleep(1)
+            seconds_remaining -= 1
+        if not user_input_received.is_set() and not stop_event.is_set():
+            # Time's up, exit cleanly
+            print(bold_red + "\nSafeguard activated, stopping.".center(80) + reset)
+            sys.exit(1)
+
+    def get_user_input(user_input_received, response_holder, stop_event):
+        try:
+            response = input(bold_red + "> " + reset)
+            response_holder['response'] = response
+            user_input_received.set()
+        except KeyboardInterrupt:
+            stop_event.set()
+            user_input_received.set()
+            print("\n")
+
+    # Print initial countdown box above the input prompt
+    print("\n" * 3)  # Reserve space for the countdown box
+    # Start the countdown timer thread
+    countdown_duration = 150  # 2 minutes and 30 seconds
+    countdown_thread = threading.Thread(target=countdown_timer, args=(countdown_duration, user_input_received, stop_event))
+    countdown_thread.start()
+
+    # Start the user input thread
+    input_thread = threading.Thread(target=get_user_input, args=(user_input_received, response_holder, stop_event))
+    input_thread.start()
+
+    # Wait for user input or timer to finish
+    input_thread.join()
+
+    if stop_event.is_set():
+        print(bold_red + "\nProcess interrupted by user. Exiting.".center(80) + reset)
+        sys.exit(1)
+
+    # Check the user's response
+    response = response_holder['response']
     if response.strip().lower() != 'i understand and accept the risk':
         print(bold_red + "\nAction aborted due to format mismatch and lack of acknowledgment.".center(80) + reset)
         print(bold_red + "You've chosen... unwisely.".center(80) + reset)
