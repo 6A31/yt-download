@@ -1,3 +1,9 @@
+# hehehehhehehereheheheheheheh
+
+venv/*
+
+
+
 ### Video ###
 *.3g2
 *.3gp
@@ -17,9 +23,21 @@
 *.webm
 
 
-# hehehehhehehereheheheheheheh
 
-venv/*
+### Audio ###
+*.aif
+*.iff
+*.m3u
+*.m4a
+*.mid
+*.mp3
+*.mpa
+*.ra
+*.wav
+*.wma
+*.ogg
+*.flac
+
 
 
 
