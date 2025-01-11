@@ -16,7 +16,7 @@ A lightweight terminal-based YouTube download tool with optional flags to open t
 
 - **Python 3.x**
 - **yt-dlp package**
-
+- **ffmpeg** (if you wish to convert files)
 ## Installation
 
 1. **Clone or download this repository**.
