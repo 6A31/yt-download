@@ -22,18 +22,19 @@ A lightweight terminal-based YouTube download tool with optional flags to open t
 1. **Clone or download this repository**.
 
 2. **Install Dependencies**:
+    ```
     pip install -r requirements.txt
     Alternatively, install yt-dlp directly:
-    pip install yt-dlp
+    pip install yt-dlp```
 
 ## Usage
 
-python youtube_downloader.py [options] <YouTube_URL> [output_file_name]
+`python youtube_downloader.py [options] <YouTube_URL> [output_file_name]`
 
 Or make the script executable (Unix/Linux):
 
-chmod +x youtube_downloader.py
-./youtube_downloader.py [options] <YouTube_URL> [output_file_name]
+`chmod +x youtube_downloader.py`
+`./youtube_downloader.py [options] <YouTube_URL> [output_file_name]`
 
 ## Options
 
