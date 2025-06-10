@@ -52,43 +52,43 @@ chmod +x youtube_downloader.py
 ## Examples
 
 1. Download a video with default file name and format:
-   python youtube_downloader.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+   `python youtube_downloader.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ"`
 
 2. Download a video with a specified output file name:
-   python youtube_downloader.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" myvideo.mp4
+   `python youtube_downloader.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" myvideo.mp4`
 
 3. Download to the Downloads folder with a specified file name:
-   python youtube_downloader.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" myvideo.mp4 -d
+   `python youtube_downloader.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" myvideo.mp4 -d`
 
 4. Attempt to download to a subdirectory in Downloads (will raise an error):
-   python youtube_downloader.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" folder/subfolder/myvideo.mp4 -d
-   Error: Cannot combine a custom output path with the '-d' flag.
-   Remove the path from the output file name or do not use the '-d' flag.
+   `python youtube_downloader.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" folder/subfolder/myvideo.mp4 -d`
+   `Error: Cannot combine a custom output path with the '-d' flag.`
+   `Remove the path from the output file name or do not use the '-d' flag.`
 
 5. Download a video to a specific directory specified in the output file name:
-   python youtube_downloader.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" folder/subfolder/myvideo.mp4
+   `python youtube_downloader.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" folder/subfolder/myvideo.mp4`
 
 6. Download a video with a specified format, warning if extension doesn't match:
-   python youtube_downloader.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" myvideo.webm -f mp4
-   Warning: The file extension of 'myvideo.webm' does not match the specified format 'mp4'. Proceeding anyway.
+   `python youtube_downloader.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" myvideo.webm -f mp4`
+   `Warning: The file extension of 'myvideo.webm' does not match the specified format 'mp4'. Proceeding anyway.`
 
 7. Download and play the video after downloading:
-   python youtube_downloader.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" -p
+   `python youtube_downloader.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" -p`
 
 8. List all available formats for a URL (no download):
-   python youtube_downloader.py --list-formats "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+   `python youtube_downloader.py --list-formats "https://www.youtube.com/watch?v=dQw4w9WgXcQ"`
 
 9. Download subtitles (default: English) along with the video:
-   python youtube_downloader.py --subtitles "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+   `python youtube_downloader.py --subtitles "https://www.youtube.com/watch?v=dQw4w9WgXcQ"`
 
 10. Download subtitles in multiple languages:
-   python youtube_downloader.py --subtitles --sub-lang "en,es" "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+   `python youtube_downloader.py --subtitles --sub-lang "en,es" "https://www.youtube.com/watch?v=dQw4w9WgXcQ"`
 
 11. Use a cookies file:
-   python youtube_downloader.py --cookies /path/to/cookies.txt "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+   `python youtube_downloader.py --cookies /path/to/cookies.txt "https://www.youtube.com/watch?v=dQw4w9WgXcQ"`
 
 12. Limit total downloads to 1 (useful for playlists):
-   python youtube_downloader.py --max-downloads 1 "https://www.youtube.com/watch?v=PLAYLIST_LINK"
+   `python youtube_downloader.py --max-downloads 1 "https://www.youtube.com/watch?v=PLAYLIST_LINK"`
 
 ## Notes
 
